@@ -29,6 +29,8 @@ private val __Intent: KProperty1<EventState, String?>
     get() = EventState::intent
 private val __Step: KProperty1<EventState, String?>
     get() = EventState::step
+private val __Notified: KProperty1<EventState, Boolean?>
+    get() = EventState::notified
 class EventState_<T>(previous: KPropertyPath<T, *>?, property: KProperty1<*, EventState?>) :
         KPropertyPath<T, EventState?>(previous,property) {
     val entityValues: KCollectionSimplePropertyPath<T, EntityValue?>
@@ -52,6 +54,9 @@ class EventState_<T>(previous: KPropertyPath<T, *>?, property: KProperty1<*, Eve
     val step: KPropertyPath<T, String?>
         get() = KPropertyPath(this,__Step)
 
+    val notified: KPropertyPath<T, Boolean?>
+        get() = KPropertyPath(this,__Notified)
+
     companion object {
         val EntityValues: KCollectionSimplePropertyPath<EventState, EntityValue?>
             get() = KCollectionSimplePropertyPath(null, __EntityValues)
@@ -66,7 +71,9 @@ class EventState_<T>(previous: KPropertyPath<T, *>?, property: KProperty1<*, Eve
         val Intent: KProperty1<EventState, String?>
             get() = __Intent
         val Step: KProperty1<EventState, String?>
-            get() = __Step}
+            get() = __Step
+        val Notified: KProperty1<EventState, Boolean?>
+            get() = __Notified}
 }
 
 class EventState_Col<T>(previous: KPropertyPath<T, *>?, property: KProperty1<*,
@@ -92,6 +99,9 @@ class EventState_Col<T>(previous: KPropertyPath<T, *>?, property: KProperty1<*,
 
     val step: KPropertyPath<T, String?>
         get() = KPropertyPath(this,__Step)
+
+    val notified: KPropertyPath<T, Boolean?>
+        get() = KPropertyPath(this,__Notified)
 
     @Suppress("UNCHECKED_CAST")
     override fun memberWithAdditionalPath(additionalPath: String): EventState_<T> =
@@ -119,6 +129,9 @@ class EventState_Map<T, K>(previous: KPropertyPath<T, *>?, property: KProperty1<
 
     val step: KPropertyPath<T, String?>
         get() = KPropertyPath(this,__Step)
+
+    val notified: KPropertyPath<T, Boolean?>
+        get() = KPropertyPath(this,__Notified)
 
     @Suppress("UNCHECKED_CAST")
     override fun memberWithAdditionalPath(additionalPath: String): EventState_<T> =

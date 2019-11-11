@@ -116,6 +116,10 @@ internal class Bot(
             botDefinition.botEnabledListener(action)
         }
 
+        if (!botDefinition.hasToPersistAction(userTimeline, action)) {
+            connectorData.saveTimeline = false
+        }
+
         if (!userTimeline.userState.botDisabled) {
             connector.startTypingInAnswerTo(action, connectorData)
             val story = getStory(userTimeline, dialog, action)
@@ -248,7 +252,7 @@ internal class Bot(
             }
             dialog.state.currentIntent = intent
             // send choice always reactivate disable bot (is the intent is not a disabled intent)
-            if (sendChoiceActivateBot && !botDefinition.isBotDisabledIntent(dialog.state.currentIntent)) {
+            if (sendChoiceActivateBot && !choice.state.notified && !botDefinition.isBotDisabledIntent(dialog.state.currentIntent)) {
                 userTimeline.userState.botDisabled = false
                 botDefinition.botEnabledListener(choice)
             }

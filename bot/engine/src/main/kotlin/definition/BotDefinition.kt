@@ -23,6 +23,7 @@ import ai.tock.bot.engine.I18nTranslator
 import ai.tock.bot.engine.action.Action
 import ai.tock.bot.engine.action.SendSentence
 import ai.tock.bot.engine.user.PlayerId
+import ai.tock.bot.engine.user.UserTimeline
 import ai.tock.nlp.api.client.model.Entity
 import ai.tock.nlp.api.client.model.EntityType
 import ai.tock.shared.property
@@ -209,6 +210,14 @@ interface BotDefinition : I18nKeyProvider {
      *  Listener invoked when bot is enabled.
      */
     val botEnabledListener: (Action) -> Unit get() = {}
+
+    /**
+     * If this method returns true, the action will be added in the stored history.
+     *
+     * By default, actions where the bot is not only [ai.tock.bot.engine.dialog.EventState.notified]
+     * are added in the bot history.
+     */
+    fun hasToPersistAction(timeline: UserTimeline, action: Action): Boolean = !action.state.notified
 
     /**
      * Returns a [TestBehaviour]. Used in Integration Tests.

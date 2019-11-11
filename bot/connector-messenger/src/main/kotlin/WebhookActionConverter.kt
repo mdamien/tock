@@ -61,9 +61,9 @@ internal object WebhookActionConverter {
             is MessageWebhook ->
                 with(message.message) {
                     if (quickReply != null) {
-                        if(quickReply!!.hasEmailPayloadFromMessenger()){
-                            readSentence(message,applicationId)
-                        }else{
+                        if (quickReply!!.hasEmailPayloadFromMessenger()) {
+                            readSentence(message, applicationId)
+                        } else {
                             SendChoice.decodeChoiceId(quickReply!!.payload)
                                 .let { (intentName, parameters) ->
                                     if (parameters.containsKey(SendChoice.NLP)) {
@@ -87,11 +87,11 @@ internal object WebhookActionConverter {
                     } else {
                         val a = attachments
                         if (a.isNotEmpty()) {
-                            val type = a.first().type
-                            when (type) {
-                                AttachmentType.location -> readLocation(message, a.first(), applicationId)
-                                AttachmentType.image -> readAttachment(message, a.first(), applicationId, image)
-                                AttachmentType.audio -> readAttachment(message, a.first(), applicationId, audio)
+                            val first = a.first()
+                            when (first.type) {
+                                AttachmentType.location -> readLocation(message, first, applicationId)
+                                AttachmentType.image -> readAttachment(message, first, applicationId, image)
+                                AttachmentType.audio -> readAttachment(message, first, applicationId, audio)
                                 // ignore for now
                                 else -> readSentence(message, applicationId)
                             }
